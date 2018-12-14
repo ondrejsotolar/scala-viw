@@ -1,5 +1,6 @@
-package viw.actions
+package viw.actions.cursor
 
+import viw.actions.Action
 import viw.internals.State
 
 object CursorMoveLeft extends Action {
