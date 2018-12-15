@@ -7,12 +7,32 @@ object LinePosition {
     state.position.line == state.contentLines.size - 1
   }
 
+  def lastLine(state: State, line: Int): Boolean = {
+    line == state.contentLines.size - 1
+  }
+
   def lineEnd(state: State): Boolean = {
     state.position.character == state.contentLines(state.position.line).size - 1
   }
 
+  def lineEnd(state: State, line: Int, position: Int): Boolean = {
+    position == state.contentLines(line).size - 1
+  }
+
   def endOfFile(state: State): Boolean = {
     lastLine(state) && lineEnd(state)
+  }
+
+  def endOfFile(state: State, line: Int, char: Int): Boolean = {
+    lastLine(state, line) && lineEnd(state, line, char)
+  }
+
+  def startOfFile(state: State): Boolean = {
+    firstLine(state) && lineStart(state)
+  }
+
+  def startOfFile(line: Int, char: Int): Boolean = {
+    line == 0 && char == 0
   }
 
   def extendedLineEnd(state: State): Boolean = {
@@ -21,6 +41,10 @@ object LinePosition {
 
   def lineStart(state: State): Boolean = {
     state.position.character == 0
+  }
+
+  def lineStart(position: Int): Boolean = {
+    position == 0
   }
 
   def firstLine(state: State): Boolean = {

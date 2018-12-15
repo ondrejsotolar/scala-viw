@@ -39,6 +39,23 @@ object Cursor {
 
   object MoveToStartOfNextWord extends CommandRunner{
     override def conditions: List[(State) => Boolean] = List(not(LinePosition.endOfFile))
-    override def actions: List[Action] = List()
+    override def actions: List[Action] = List(StartOfNextWord)
   }
+
+  object MoveToStartOfWord extends CommandRunner{
+    override def conditions: List[(State) => Boolean] = List(not(LinePosition.startOfFile))
+    override def actions: List[Action] = List(StartOfWord)
+  }
+
+  object MoveToEndOfWord extends CommandRunner{
+    override def conditions: List[(State) => Boolean] = List(not(LinePosition.endOfFile))
+    override def actions: List[Action] = List(EndOfWord)
+  }
+
+  object MatchBrackets extends CommandRunner{
+    override def conditions: List[(State) => Boolean] = always
+    override def actions: List[Action] = List(MatchBracketsAction)
+  }
+
+
 }

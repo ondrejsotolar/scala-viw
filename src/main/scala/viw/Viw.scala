@@ -23,6 +23,9 @@ object Viw {
     case "0" => Cursor.MoveToStartOfLine.process(state)
     case "$" => Cursor.MoveToEndOfLine.process(state)
     case "w" => Cursor.MoveToStartOfNextWord.process(state)
+    case "b" => Cursor.MoveToStartOfWord.process(state)
+    case "e" => Cursor.MoveToEndOfWord.process(state)
+    case "%" => Cursor.MatchBrackets.process(state)
     case _ => Some(state)
   }
 
