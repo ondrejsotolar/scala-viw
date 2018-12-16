@@ -22,7 +22,9 @@ scalacOptions in ThisBuild ++= Seq(
 name := "viw"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+//  "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "org.scala-js" %%% "scalajs-dom" % "0.9.2"
+
 )
 

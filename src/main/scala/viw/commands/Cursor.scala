@@ -23,7 +23,7 @@ object Cursor {
   }
 
   object MoveRight extends CommandRunner {
-    override def conditions: List[(State) => Boolean] = List(not(LinePosition.extendedLineEnd))
+    override def conditions: List[(State) => Boolean] = List(not(LinePosition.lineEndExtended))
     override def actions : List[Action] = List(CursorMoveRight)
   }
 
