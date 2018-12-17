@@ -141,6 +141,7 @@ class CommandsTest extends FunSuite with ViwTest with BeforeAndAfter {
     )
   }
 
+  // TODO: fix
   test("Join line") {
     viwTrue(
       "J",

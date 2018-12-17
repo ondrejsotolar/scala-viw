@@ -1,21 +1,13 @@
 package viw
 
-import viw.commands.Cursor
+import viw.commands.{Cursor, Mode, Modify}
 import viw.internals.State
 
 object Viw {
 
-  var viwMode: Boolean = false;
-
-  def processKey(key: String, state: State): Option[State] = {
-    if (!state.mode) {
-      maybeTurnOn(key)
-      return Some(state)
-    } else
-      process(key, state)
-  }
-
-  def process(key: String, state: State): Option[State] = key match {
+  def processKey(key: String, state: State): Option[State] = key match {
+    case " " => Mode.TurnViwOn.process(state)
+    case "i" => Mode.TurnViwOff.process(state)
     case "h" => Cursor.MoveLeft.process(state)
     case "l" => Cursor.MoveRight.process(state)
     case "j" => Cursor.MoveDown.process(state)
@@ -26,10 +18,10 @@ object Viw {
     case "b" => Cursor.MoveToStartOfWord.process(state)
     case "e" => Cursor.MoveToEndOfWord.process(state)
     case "%" => Cursor.MatchBrackets.process(state)
+    case "x" => Modify.Delete.process(state)
+    case "X" => Modify.Backspace.process(state)
+    case "D" => Modify.DeleteLine.process(state)
+    case "J" => Modify.JoinLine.process(state)
     case _ => Some(state)
-  }
-
-  def maybeTurnOn(key: String): Unit = {
-      viwMode = key == " "
   }
 }

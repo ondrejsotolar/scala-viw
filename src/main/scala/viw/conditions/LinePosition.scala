@@ -3,6 +3,15 @@ import viw.internals.State
 
 object LinePosition {
 
+  def isCursorOnCharacter(state: State): Boolean = {
+    try {
+      "" != state.contentLines(state.position.line)(state.position.character)
+    } catch {
+      case _: Throwable => false
+    }
+
+  }
+
   def lastLine(state: State): Boolean = {
     state.position.line == state.contentLines.size - 1
   }
