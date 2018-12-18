@@ -37,7 +37,7 @@ case class State(content: String,
 
 object State {
   def properSplit(str: String): Vector[String] =
-    (str: String).split("\n", -1).toVector
+    (str: String).replaceAll("\r", "").split("\n", -1).toVector
 
   def fromCursoredText(str: String, mode: Boolean = true): State = {
     val lines = properSplit(str)

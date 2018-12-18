@@ -5,6 +5,7 @@ import viw.internals.State
 
 object Viw {
 
+  def textModifyKeys: List[String] = List("x","X","D","J")
   var prevKey: String = "";
 
   def processKey(key: String, state: State): Option[State] = {
@@ -40,12 +41,12 @@ object Viw {
   }
 
   def maybeRememberKey(key: String, state: State): Unit = {
-    if (state.mode)
+    if (state.mode && key != ".")
       prevKey = key
   }
 
   def repeatLastCommand(state: State): Option[State] = {
-    if (prevKey != "")
+    if (textModifyKeys.contains(prevKey))
       processKey(prevKey, state)
     else
       Some(state)

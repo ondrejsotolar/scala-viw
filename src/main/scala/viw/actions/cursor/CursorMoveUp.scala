@@ -25,7 +25,7 @@ object CursorMoveUp extends Action {
   def getPositionOnLineEnd(state: State) : Int = {
     val lineEndDistance = state.contentLines(state.position.line).size - state.position.character
 
-    val difference = state.contentLines(state.position.line + 1).size - lineEndDistance
+    val difference = state.contentLines(state.position.line - 1).size - lineEndDistance
 
     if (difference < 0)
       0 else difference
