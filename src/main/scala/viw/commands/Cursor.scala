@@ -56,6 +56,4 @@ object Cursor {
     override def conditions: List[(State) => Boolean] = List(ViwMode.isViwOn)
     override def actions: List[Action] = List(MatchBracketsAction)
   }
-
-
 }

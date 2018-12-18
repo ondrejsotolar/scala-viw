@@ -8,6 +8,13 @@ object Viw {
   def processKey(key: String, state: State): Option[State] = key match {
     case " " => Mode.TurnViwOn.process(state)
     case "i" => Mode.TurnViwOff.process(state)
+    case "a" => Mode.Append.process(state)
+    case "o" => Mode.OpenNewline.process(state)
+    case "s" => Mode.Substitute.process(state)
+    case "G" => Mode.GoToLastLine.process(state)
+    case "I" => Mode.InsertInLine.process(state)
+    case "A" => Mode.InsertAfterLine.process(state)
+    case "C" => Mode.DeleteAndExit.process(state)
     case "h" => Cursor.MoveLeft.process(state)
     case "l" => Cursor.MoveRight.process(state)
     case "j" => Cursor.MoveDown.process(state)
