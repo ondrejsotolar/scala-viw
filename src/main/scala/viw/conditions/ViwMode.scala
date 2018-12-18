@@ -2,7 +2,7 @@ package viw.conditions
 
 import viw.internals.State
 
-object StateMode {
+object ViwMode {
 
   def isViwOn(state: State): Boolean = {
     state.mode
