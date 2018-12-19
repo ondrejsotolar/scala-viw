@@ -29,4 +29,17 @@ object StateUtils {
     }
     nextLine(state, 0, 0)
   }
+
+  def getLineStartRealPosition(state: State): Int = {
+    def nextLine(state: State, line: Int, fromStart: Int): Int = {
+      if (line == state.position.line)
+        fromStart
+      else
+        nextLine(
+          state,
+          line + 1,
+          fromStart + state.contentLines(line).length + 1 /*sys.props("line.separator").length*/)
+    }
+    nextLine(state, 0, 0)
+  }
 }

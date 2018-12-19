@@ -1,6 +1,6 @@
 package viw.commands
 
-import viw.actions.Action
+import viw.actions.{Action}
 import viw.internals.State
 
 abstract class CommandRunner {
@@ -20,6 +20,5 @@ abstract class CommandRunner {
   }
 
   def not(condition: (State) => Boolean): (State) => Boolean = !condition(_)
-
   def always: List[(State) => Boolean] = List((_) => true)
 }
