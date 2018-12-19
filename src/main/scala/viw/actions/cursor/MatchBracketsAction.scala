@@ -61,16 +61,18 @@ object MatchBracketsAction extends Action {
     if (LinePosition.endOfFile(state, line, char))
       return (-1,-1)
 
-    if (LinePosition.lineEnd(state, line, char))
-      return findMatchingBracketForward(state, line + 1, 0, original, opposite, stack)
+    val nextLine = if (LinePosition.lineEnd(state, line, char))
+      line + 1 else line
+    val nextChar = if (nextLine > line)
+      0 else char + 1
 
     if (current == original)
-      return findMatchingBracketForward(state, line, char + 1, original, opposite, stack + 1)
+      return findMatchingBracketForward(state, nextLine, nextChar, original, opposite, stack + 1)
 
     if (current == opposite)
-      return findMatchingBracketForward(state, line, char + 1, original, opposite, stack - 1)
+      return findMatchingBracketForward(state, nextLine, nextChar, original, opposite, stack - 1)
 
-    findMatchingBracketForward(state, line, char + 1, original, opposite, stack)
+    findMatchingBracketForward(state, nextLine, nextChar, original, opposite, stack)
   }
 
   def findMatchingBracketBackward(state: State, line: Int, char: Int, original: Char, opposite: Char, stack: Int) : (Int,Int) = {

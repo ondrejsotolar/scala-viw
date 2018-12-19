@@ -8,7 +8,10 @@ object StartOfWord extends Action {
 
   override def apply(state: State): State = {
 
-    val nextWordPosition: (Int,Int) = prevWordStart(state, state.position.line, state.position.character, false)
+    val nextChar = if (LinePosition.lineStart(state.position.character))
+      0 else state.position.character - 1
+    val nextWordPosition: (Int,Int) =
+      prevWordStart(state, state.position.line, nextChar, false)
 
     new State(
       state.content,
@@ -21,13 +24,18 @@ object StartOfWord extends Action {
     if (LinePosition.startOfFile(line, char))
       return (0,0)
 
-    if (LinePosition.lineStart(char))
-      return prevWordStart(state, line - 1, state.contentLines(line - 1).size - 1, false)
+    if (LinePosition.lineStart(char)) {
+      if (prevNonWhitespace)
+        return (line, 0)
+      else
+        return prevWordStart(state, line - 1, state.contentLines(line - 1).size - 1, false)
+    }
 
-    val current: Char = state.contentLines(line)(char)
-    if (current.isWhitespace && prevNonWhitespace)
+    val current = state.contentLines(line)(char)
+    //val next = state.contentLines(line)(char + 1)
+    if (!current.isLetterOrDigit && prevNonWhitespace)
       (line, char + 1)
     else
-      prevWordStart(state, line, char - 1, current.isWhitespace)
+      prevWordStart(state, line, char - 1, current.isLetterOrDigit)
   }
 }

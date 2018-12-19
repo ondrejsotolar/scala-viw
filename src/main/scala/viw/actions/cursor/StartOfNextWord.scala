@@ -23,16 +23,16 @@ object StartOfNextWord extends Action {
 
     val current: Char = state.contentLines(line)(char)
 
-    if ((LinePosition.lineStart(char) && !current.isWhitespace)
-      || (prevWhitespace && !current.isWhitespace))
+    if ((LinePosition.lineStart(char) && current.isLetterOrDigit)
+      || (prevWhitespace && current.isLetterOrDigit))
       (line, char)
     else
       if (LinePosition.lineEnd(state, line, char))
         if (LinePosition.lastLine(state, line))
           (-1,-1)
          else
-          nextWordStart(state, line + 1, 0, current.isWhitespace)
+          nextWordStart(state, line + 1, 0, !current.isLetterOrDigit)
       else
-        nextWordStart(state, line, char + 1, current.isWhitespace)
+        nextWordStart(state, line, char + 1, !current.isLetterOrDigit)
   }
 }

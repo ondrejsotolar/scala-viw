@@ -21,16 +21,26 @@ object EndOfWord extends Action {
 
   def wordEnd(state: State, line: Int, char: Int, prevNonWhitespace: Boolean): (Int,Int) = {
 
-    if (LinePosition.endOfFile(state, line, char))
-      return (line, char)
-
-    if (LinePosition.lineEnd(state, line, char))
-      return wordEnd(state, line + 1, 0, false)
+    if (LinePosition.endOfFile(state, line, char)) {
+      if (!state.contentLines(line)(char).isLetterOrDigit)
+        return (-1,-1)
+      else
+        return (line, char)
+    }
 
     val current: Char = state.contentLines(line)(char)
-    if (current.isWhitespace && prevNonWhitespace)
-      (line, char - 1)
+    if (LinePosition.lineEnd(state, line, char)) {
+      val result = wordEnd(state, line + 1, 0, true)
+      if (result._1 < 0 && current.isLetterOrDigit)
+        return (line, char)
+      else
+        return result
+    }
+
+    val next: Char = state.contentLines(line)(char + 1)
+    if (!next.isLetterOrDigit && current.isLetterOrDigit && prevNonWhitespace)
+      (line, char)
     else
-      wordEnd(state, line, char + 1, !current.isWhitespace)
+      wordEnd(state, line, char + 1, next.isLetterOrDigit)
   }
 }

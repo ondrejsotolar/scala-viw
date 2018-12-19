@@ -49,6 +49,24 @@ class MoveUpTest extends FunSuite with ViwTest with BeforeAndAfter {
       "ipsum dolor sit amet" + br +
       "Cras qiet.idunt."
 
+  val text8 =
+    "Lorem" + br +
+      "Lorem2" + br +
+      "ipsum dolor sit amet" + br +
+      "Cras qiet.idunt#.#"
+
+  val text9 =
+    "Lorem" + br +
+      "Lorem2" + br +
+      "ipsum dolor sit# #amet" + br +
+      "Cras qiet.idunt."
+
+  val text10 =
+    "Lorem" + br +
+      "Lorem2" + br +
+      "ipsum dolor sit am#e#t" + br +
+      "Cras qiet.idunt."
+
   test("Cursor move up one, first line end") {
     viwTrue("k", text3, text3)
   }
@@ -68,4 +86,14 @@ class MoveUpTest extends FunSuite with ViwTest with BeforeAndAfter {
   test("Cursor move up n, end of line") {
     viwTrue("kkkkkkkkkkkkkkkk", text1, text7)
   }
+
+  test("Cursor move up one, current line is shorter") {
+    viwTrue("k", text8, text9)
+  }
+
+  test("Cursor move up one, current line is longer") {
+    viwTrue("k", text10, text6)
+  }
+
+
 }
