@@ -84,6 +84,6 @@ object ViwTest {
       text: String,
       mode: Boolean = true,
       selection: Option[(State.Position, State.Position)] = None) {
-    val state = State.fromCursoredText(text, mode)
+    val state = State.fromCursoredText(text.replaceAll("\r", ""), mode)
   }
 }

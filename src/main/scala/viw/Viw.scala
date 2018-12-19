@@ -31,17 +31,17 @@ object Viw {
       /*TESTED*/case "b" => Cursor.MoveToStartOfWord.process(state)
       /*TESTED*/case "e" => Cursor.MoveToEndOfWord.process(state)
       /*TESTED*/case "%" => Cursor.MatchBrackets.process(state)
-      /**/case "x" => Modify.Delete.process(state)
+      /*TESTED*/case "x" => Modify.Delete.process(state)
       /*TESTED*/case "X" => Modify.Backspace.process(state)
-      /**/case "D" => Modify.DeleteLine.process(state)
-      /**/case "J" => Modify.JoinLine.process(state)
-      /**/case "." => repeatLastCommand(state)
+      /*TESTED*/case "D" => Modify.DeleteLine.process(state)
+      /*____FIX*/case "J" => Modify.JoinLine.process(state)
+      /*TESTED*/case "." => repeatLastCommand(state)
       /**/case _ => Some(state)
     }
   }
 
   def maybeRememberKey(key: String, state: State): Unit = {
-    if (state.mode && key != ".")
+    if (state.mode && key != "." && textModifyKeys.contains(key))
       prevKey = key
   }
 

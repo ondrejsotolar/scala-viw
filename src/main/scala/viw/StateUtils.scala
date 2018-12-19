@@ -12,7 +12,7 @@ object StateUtils {
         getRealPosition(
           state,
           line + 1,
-          fromStart + state.contentLines(line).length + sys.props("line.separator").length)
+          fromStart + state.contentLines(line).length + 1 /*sys.props("line.separator").length*/)
     }
     getRealPosition(state, 0, 0)
   }
@@ -25,7 +25,7 @@ object StateUtils {
         nextLine(
           state,
           line + 1,
-          fromStart + state.contentLines(line).length + sys.props("line.separator").length)
+          fromStart + state.contentLines(line).length + 1 /*sys.props("line.separator").length*/)
     }
     nextLine(state, 0, 0)
   }

@@ -1,6 +1,6 @@
 package viw.actions.modify
 
-import viw.{StateUtils, internals}
+import viw.{StateUtils}
 import viw.actions.Action
 import viw.internals.State
 
