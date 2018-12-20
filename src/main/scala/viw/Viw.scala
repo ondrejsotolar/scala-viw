@@ -5,16 +5,16 @@ import viw.internals.State
 
 object Viw {
 
-  def repeatableCommands: List[String] = List("x","X","D","J","dd")
+  def repeatableCommands: List[String] = List("x","X","D","J","dd","dh","dl","dj","dk")
   def combinedFirstKeys: List[String] = List("d")
-  def combinedSecondKeys: List[String] = List("d")
+  def combinedSecondKeys: List[String] = List("d","h","l","j","k")
 
   var repeatableCommand = ""
   var prevKey = ""
 
   def processKey(key: String, state: State): Option[State] = {
 
-    val combinedCommand: String = updateMaybeCommand(key, state)
+    val combinedCommand: String = combineWithPrevCommand(key, state)
 
     combinedCommand match {
       case " " => applyCommand(Mode.TurnViwOn, state)
@@ -41,7 +41,11 @@ object Viw {
       case "D" => applyCommand(Modify.DeleteLine, state)
       case "J" => applyCommand(Modify.JoinLine, state)
       case "." => repeatLastCommand(state)
-      case "dd" => applyCommand(Extra.DeleteWholeLine, state)
+      /*UT*/case "dd" => applyCommand(Extra.DeleteWholeLine, state)
+      /*UT*/case "dh" => applyCommand(Extra.DeleteLeft, state)
+      /*UT*/case "dl" => applyCommand(Extra.DeleteRight, state)
+      /*UT*/case "dk" => applyCommand(Extra.DeleteUp, state)
+      /*UT*/case "dj" => applyCommand(Extra.DeleteDown, state)
       case _ => Some(state)
     }
   }
@@ -51,7 +55,7 @@ object Viw {
     runner.process(state)
   }
 
-  def updateMaybeCommand(key: String, state: State): String = {
+  def combineWithPrevCommand(key: String, state: State): String = {
     if (!state.mode)
       return "NONE"
 
