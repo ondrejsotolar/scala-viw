@@ -10,7 +10,7 @@ object DeleteAction extends Action {
 
   override def apply(state: State): State = {
     val realPosition = StateUtils.getRealPosition(state)
-    var newPosition =
+    val newPosition =
       if (LinePosition.lineEnd(state) && !LinePosition.lineStart(state))
           state.position.character - 1
       else

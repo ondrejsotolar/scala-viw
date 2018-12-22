@@ -1,4 +1,4 @@
-package viw.cursor
+package viw.mandatory
 import org.scalatest.FunSuite
 import viw.{ViwTest}
 

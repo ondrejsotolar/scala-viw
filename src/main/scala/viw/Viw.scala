@@ -41,11 +41,11 @@ object Viw {
       case "D" => applyCommand(Modify.DeleteLine, state)
       case "J" => applyCommand(Modify.JoinLine, state)
       case "." => repeatLastCommand(state)
-      /*UT*/case "dd" => applyCommand(Extra.DeleteWholeLine, state)
-      /*UT*/case "dh" => applyCommand(Extra.DeleteLeft, state)
-      /*UT*/case "dl" => applyCommand(Extra.DeleteRight, state)
-      /*UT*/case "dk" => applyCommand(Extra.DeleteUp, state)
-      /*UT*/case "dj" => applyCommand(Extra.DeleteDown, state)
+      case "dd" => applyCommand(Extra.DeleteWholeLine, state)
+      case "dh" => applyCommand(Extra.DeleteLeft, state)
+      case "dl" => applyCommand(Extra.DeleteRight, state)
+      case "dk" => applyCommand(Extra.DeleteUp, state)
+      case "dj" => applyCommand(Extra.DeleteDown, state)
       case _ => Some(state)
     }
   }

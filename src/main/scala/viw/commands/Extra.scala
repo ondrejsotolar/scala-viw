@@ -3,7 +3,7 @@ package viw.commands
 import viw.actions.extra._
 import viw.actions.Action
 import viw.actions.cursor.CursorMoveUp
-import viw.actions.modify.{BackspaceAction, DeleteAction}
+import viw.actions.modify.{DeleteAction}
 import viw.conditions.{LinePosition, ViwMode}
 import viw.internals.State
 
