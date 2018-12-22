@@ -44,6 +44,4 @@ class MoveRightTest extends FunSuite with ViwTest with BeforeAndAfter {
         "ipsum dolor sit amet "
     viwTrue("lllllllllllllllll", actual, actual)
   }
-
-  // TODO: test trail space
 }
